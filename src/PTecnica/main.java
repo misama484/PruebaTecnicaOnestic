@@ -11,10 +11,6 @@ public class main {
 	private static ArrayList<Order> orders;
 	
 	
-	//CONSOLA
-	private static void consola(String mensaje) {
-		System.out.println(mensaje);
-	}
 	
     public static void main(String[] args) throws IOException {
         
@@ -82,23 +78,17 @@ public class main {
     	products = new ArrayList<Product>();
     	
     	while (linea != null) {
-    		//consola(linea.toString());
     		String[] productsCsv = linea.split("\n");
     		
     		for(int i = 0; i<productsCsv.length; i++) {
     			String[] productsLine = productsCsv[i].split(",");
     			Product product = new Product(productsLine[0], productsLine[1],productsLine[2]);
-    			//consola(product.toString());
     			products.add(product);
     		}
     		linea = br.readLine();
     	}
     	
     	products.remove(0);
-    	
-    	for (Product product : products) {
-    		//consola(product.toString());
-    	}
     	br.close();
     	fr.close();
     	
@@ -115,7 +105,6 @@ public class main {
     	String[] orderItem = null;   	
     	
     	while(linea!= null) {
-    		//consola(linea.toString());
     		String[] ordersCsv = linea.split("\n");
     		
     		for(int i = 0; i< ordersCsv.length; i++) {
@@ -135,9 +124,6 @@ public class main {
     	}
     	
     	orders.remove(0);
-    	for(Order order : orders) {
-    		//consola(order.toString());
-    	}
     	     	
     	return null;
     }
@@ -153,10 +139,7 @@ public class main {
     	Float orderPrice = 0f;
     	//por cada pedido extraemos el id y el array de productos
     	for(Order order : orderList) {
-    		//consola(order.getId());
     		orderId = Integer.parseInt(order.getId());
-    		
-    		
     		//obtener lista de productos de cada pedido
     		productsOrder = order.getProductList();
     		//por cada producto de la orden
@@ -172,11 +155,9 @@ public class main {
     			}
     			//sumamos el precio al pedido
     				orderPrice = orderPrice + priceProduct; 
-    				//consola(orderPrice.toString());
     		}
     		//anyadimos a la lista de pedidos-costo
-    		orderPrices.add(orderId + "," + orderPrice);    		
-    		
+    		orderPrices.add(orderId + "," + orderPrice);    				
     		}
 
     		//igualamos a cero el coste del pedido para la siguiente orden
@@ -253,10 +234,7 @@ public class main {
     	//obtenemos los ids de los productos
     	for(ProductsCustomers item : ListaProductos) { 
     		String idCustomers = "";
-    		ArrayList<String>idCustomer = item.getCustomerList();
-	    	for(String item2 : idCustomer) {
-	    		consola(item2);
-	    	}   		
+    		ArrayList<String>idCustomer = item.getCustomerList(); 		
     	}
     	
     	//ESCRIBIMOS EN FICHERO .csv
@@ -369,10 +347,6 @@ public class main {
     	//ordenamos la lista de mayor a menor costo
     	ranking.sort(Comparator.comparingDouble(CustomerRanking::getTotalcost).reversed());
     	
-    	//recorremos la lista de clientes-pedido-coste
-    	for(CustomerRanking custR : ranking) {
-    		consola(custR.toCSV());
-    	}
     	
     	//escribimos en fichero
     	fw = new FileWriter(filename);
